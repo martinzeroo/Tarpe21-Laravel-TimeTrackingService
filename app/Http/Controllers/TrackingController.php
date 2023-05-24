@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tracking;
 use Illuminate\Http\Request;
+use Illuminate\Http\View;
 
 class TrackingController extends Controller
 {
@@ -12,7 +13,7 @@ class TrackingController extends Controller
      */
     public function index()
     {
-        //
+        return view('Tracking.index');
     }
 
     /**
