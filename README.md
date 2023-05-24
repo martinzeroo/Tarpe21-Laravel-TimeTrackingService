@@ -7,60 +7,75 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+```
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php82-composer:latest \
+    composer install --ignore-platform-reqs
+```
+# Aja jälgimisteenus
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Projekti eesmärgiks on luua rakendus aja jälgimiseks projektides. Rakendus võimaldab tavakasutajal sisestada kulunud aja iga projektis tehtud ülesande kohta, mida administraator saab hiljem kinnitada või tagasi lükata. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+PROJEKT KOOSNEB KOLMEST ERALDISEISVAST ÜLESANDEST: 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Ülesanne 1. XML
 
-## Learning Laravel
+Luua XML fail vabalt valitud andmete edastamiseks, selle faili skeemifail ning XSL fail(id) erinevate transformatsioonide tarvis (soovitavalt vähemalt andmete HTML ja XML kujul kuvamiseks)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+XML fail peab sisaldama aruande Id, kasutaja, roll, nimi, perekonnanimi, sisselogimisaeg, kinnitusstaatus, võib lisada oma omadus. 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+XML-il peab olema 2 või 3 loogilist dimensiooni.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+<dim1>
+  <dim2>
+    <dim3>
+    </dim3>
+  </dim2>
+</dim1>
+```
+Kuvada andmed HTML tabelina kasutades XSLT ja PHP failis erinevad funktsioonid (näiteks, otsida aruande kinnitusstaatuse järgi). 
 
-## Laravel Sponsors
+Välja mõelda vähemalt 3 funktsiooni.
+ 
+## Ülesanne 2. Veebiteenus ja klientrakendus.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Luua veebiteenus ja klientrakendus, mis võimaldaks pakkuda teenust, eristada kasutajaid
 
-### Premium Partners
+*	Rakendus peab kasutama kõiki CRUD operatsioone
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+*	Projektide, ajaraportite ning kasutajate haldamine peab toimuma kasutades Web API't ajax päringuid tehes
 
-## Contributing
+*	Rakendus peab võimaldama luua kasutajaid
+Kasutaja
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+*	ei saa kustutada ajaraportit, kui see on juba kinnitatud.
 
-## Code of Conduct
+*	saab kustutada ajaraportit, mis ei ole kinnitatud.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+*	saab lisada ajaraporteid ainult oma projektis
 
-## Security Vulnerabilities
+*	näeb ainult oma ajaraporteid
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Administraator
 
-## License
+*	saab vaadata kõiki ajaraporteid
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+*	saab kustutada ajaraporteid, olenemata sellest kas see on kinnitatud või mitte
+
+*	saab lisada/eemaldada projekte
+
+*	saab lisada/eemaldada projektile tegevusi
+
+*	saab lisada/eemaldada projektile kasutajaid
+
+## Ülesanne 3. Projekti dokumentatsioon.
+Kasutajalood (PivotalTrackeris vms. keskkonnas) koos vastuvõtu tingimustega.
+
+Lähtekood versioonihalduses, tähenduslikud koodikinnitused ja seotud kasutajalugudega.
+
+Projekti loomise etapid koos vastavate kirjelduste ja piltidega.
+Kasutajajuhend iga rolli jaoks.
