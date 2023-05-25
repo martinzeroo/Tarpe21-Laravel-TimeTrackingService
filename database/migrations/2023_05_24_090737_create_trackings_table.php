@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('trackings', function (Blueprint $table) {
             $table->id();
+            $table->string('person',128);
+            $table->integer('duration_TimeSpent');
+            $table->string('project');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

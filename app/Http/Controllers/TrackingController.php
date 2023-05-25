@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
 use Illuminate\Http\View;
@@ -27,9 +28,19 @@ class TrackingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'person' => 'required|string|max:128',
+            'project' => 'string',
+            'duration_TimeSpent'=> 'integer|gte:0',
+            'description'=>'string'
+        ]);
+
+        $tracking = Tracking::create($validated);
+        $tracking->save();
+
+        return redirect(route('tracking.index'));
     }
 
     /**
