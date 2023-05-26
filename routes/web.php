@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('Tracking', TrackingController::class)
+Route::resource('trackings', TrackingController::class)
     -> middleware(['auth','verified']);
 
 Route::get('/dashboard', function () {

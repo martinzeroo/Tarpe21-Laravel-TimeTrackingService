@@ -14,7 +14,10 @@ class TrackingController extends Controller
      */
     public function index()
     {
-        return view('Tracking.index');
+
+        return view('trackings.index', [
+            'trackings' => Tracking::all(),
+        ]);
     }
 
     /**
@@ -40,7 +43,7 @@ class TrackingController extends Controller
         $tracking = Tracking::create($validated);
         $tracking->save();
 
-        return redirect(route('tracking.index'));
+        return redirect(route('trackings.index'));
     }
 
     /**
