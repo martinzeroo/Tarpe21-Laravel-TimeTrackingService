@@ -41,6 +41,8 @@
                             </div>
                         </div>
                         <p class="mt-4 text-lg text-gray-900">{{ $tracking->project }}</p>
+                        <p class="mt-4 text-lg text-gray-900">{{ $tracking->duration_TimeSpent }}</p>
+                        <p class="mt-4 text-lg text-gray-900">{{ $tracking->description }}</p>
                     </div>
                 </div>
             @endforeach
