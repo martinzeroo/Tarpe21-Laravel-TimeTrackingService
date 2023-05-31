@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
-use Illuminate\Http\View;
+use Illuminate\View\View;
 
 class TrackingController extends Controller
 {
@@ -57,17 +57,41 @@ class TrackingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tracking $tracking)
+    public function edit(Tracking $tracking): View
     {
-        //
+        $this->authorize('update', $tracking);
+
+
+
+        return view('trackings.edit', [
+
+            'Tracking' => $tracking,
+
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tracking $tracking)
+    public function update(Request $request, Tracking $tracking): RedirectResponse
     {
-        //
+        $this->authorize('update', $tracking);
+
+
+
+        $validated = $request->validate([
+
+            'message' => 'required|string|max:255',
+
+        ]);
+
+
+
+        $tracking->update($validated);
+
+
+
+        return redirect(route('trackings.index'));
     }
 
     /**
