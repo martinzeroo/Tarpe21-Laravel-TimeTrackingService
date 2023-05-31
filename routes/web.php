@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('trackings', TrackingController::class)
+    ->only(['index', 'store', 'edit', 'update'])
     -> middleware(['auth','verified']);
 
 Route::get('/dashboard', function () {
