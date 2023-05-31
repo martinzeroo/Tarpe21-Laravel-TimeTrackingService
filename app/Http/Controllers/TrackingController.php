@@ -80,9 +80,10 @@ class TrackingController extends Controller
 
 
         $validated = $request->validate([
-
-            'message' => 'required|string|max:255',
-
+            'person' => 'required|string|max:128',
+            'project' => 'string',
+            'duration_TimeSpent'=> 'integer|gte:0',
+            'description'=>'string'
         ]);
 
 
