@@ -82,9 +82,9 @@
 
                             @endif
                         </div>
-                        <p class="mt-4 text-lg text-gray-900">{{ $tracking->project }}</p>
-                        <p class="mt-4 text-lg text-gray-900">{{ $tracking->duration_TimeSpent }}</p>
-                        <p class="mt-4 text-lg text-gray-900">{{ $tracking->description }}</p>
+                        <p class="mt-4 text-lg text-gray-900 font-bold">{{ $tracking->project }}</p>
+                        <p class="mt-2 text-base text-gray-700">{{ $tracking->duration_TimeSpent }}</p>
+                        <p class="mt-2 text-base text-gray-700">{{ $tracking->description }}</p>
                     </div>
                 </div>
             @endforeach

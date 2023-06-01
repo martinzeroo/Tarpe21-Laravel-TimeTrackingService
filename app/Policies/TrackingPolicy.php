@@ -37,7 +37,7 @@ class TrackingPolicy
      */
     public function update(User $user, Tracking $tracking): bool
     {
-        return $tracking->user;
+        return $tracking->person;
     }
 
     /**
