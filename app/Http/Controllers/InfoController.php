@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\person;
+use App\Models\Info;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-class PersonController extends Controller
+class InfoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        return view('info.index');
     }
 
     /**

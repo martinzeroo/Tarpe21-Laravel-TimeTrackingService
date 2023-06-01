@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TrackingController;
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('trackings', TrackingController::class)
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    -> middleware(['auth','verified']);
+
+Route::resource('info', InfoController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
     -> middleware(['auth','verified']);
 
