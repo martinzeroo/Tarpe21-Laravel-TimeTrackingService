@@ -98,8 +98,12 @@ class TrackingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tracking $tracking)
+    public function destroy(Tracking $trackings): RedirectResponse
     {
-        //
+        $this->authorize('delete', $trackings);
+
+        $trackings->delete();
+
+        return redirect(route('trackings.index'));
     }
 }
