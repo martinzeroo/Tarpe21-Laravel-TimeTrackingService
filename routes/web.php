@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
@@ -36,5 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::resource('projects', ProjectController::class)
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    -> middleware(['auth','verified']);
 
 require __DIR__.'/auth.php';
