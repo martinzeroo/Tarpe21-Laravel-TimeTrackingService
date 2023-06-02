@@ -56,15 +56,38 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $this->authorize('update', $project);
+
+
+
+        return view('projects.edit', [
+
+            'Projects' => $project,
+
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, Project $project): RedirectResponse
     {
-        //
+        $this->authorize('update', $project);
+
+
+
+        $validated = $request->validate([
+            'person' => 'required|string|max:128',
+            'project' => 'string',
+        ]);
+
+
+
+        $project->update($validated);
+
+
+
+        return redirect(route('projects.index'));
     }
 
     /**
