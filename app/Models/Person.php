@@ -11,7 +11,7 @@ class Person extends Model
     use HasFactory;
     protected $fillable=[
         'person',
-        'project',
+        'fullname',
     ];
 
     public function user(): BelongsTo

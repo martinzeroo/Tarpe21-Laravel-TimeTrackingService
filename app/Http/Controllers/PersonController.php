@@ -14,7 +14,9 @@ class PersonController extends Controller
      */
     public function index(): View
     {
-        return view('person.index');
+        return view('person.index', [
+            'people' => Person::all(),
+        ]);
     }
 
     /**
@@ -32,7 +34,7 @@ class PersonController extends Controller
     {
         $validated = $request->validate([
             'person' => 'required|string|max:128',
-            'project' => 'string',
+            'fullname' => 'string',
         ]);
 
         $person = Person::create($validated);
