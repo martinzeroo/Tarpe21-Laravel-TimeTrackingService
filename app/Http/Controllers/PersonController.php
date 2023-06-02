@@ -56,15 +56,38 @@ class PersonController extends Controller
      */
     public function edit(person $person)
     {
-        //
+        $this->authorize('update', $person);
+
+
+
+        return view('person.edit', [
+
+            'Person' => $person,
+
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, person $person)
+    public function update(Request $request, Person $person): RedirectResponse
     {
-        //
+        $this->authorize('update', $person);
+
+
+
+        $validated = $request->validate([
+            'person' => 'required|string|max:128',
+            'fullname' => 'string',
+        ]);
+
+
+
+        $person->update($validated);
+
+
+
+        return redirect(route('person.index'));
     }
 
     /**
