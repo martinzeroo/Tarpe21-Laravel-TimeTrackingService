@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Info;
+use Illuminate\Http\RedirectResponse;
+use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class InfoController extends Controller
+class PersonController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        return view('info.index');
+        return view('person.index');
     }
 
     /**
@@ -27,9 +28,17 @@ class InfoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'person' => 'required|string|max:128',
+            'project' => 'string',
+        ]);
+
+        $person = Person::create($validated);
+        $person->save();
+
+        return redirect(route('person.index'));
     }
 
     /**

@@ -20,8 +20,8 @@
                         {{ __('Tracking') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('info.index')" :active="request()->routeIs('info.index')">
-                        {{ __('Info') }}
+                    <x-nav-link :href="route('person.index')" :active="request()->routeIs('person.index')">
+                        {{ __('Person') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -80,6 +80,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('trackings.index')" :active="request()->routeIs('trackings.index')">
                 {{ __('tracking') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('person.index')" :active="request()->routeIs('person.index')">
+                {{ __('Person') }}
             </x-responsive-nav-link>
         </div>
 
