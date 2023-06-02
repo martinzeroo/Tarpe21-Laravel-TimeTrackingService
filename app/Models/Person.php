@@ -4,6 +4,7 @@ namespace App\Models;
 
 Use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
@@ -14,8 +15,8 @@ class Person extends Model
         'fullname',
     ];
 
-    public function user(): BelongsTo
+    public function trackings(): HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Booking::class);
     }
 }

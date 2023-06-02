@@ -16,8 +16,8 @@ class Project extends Model
         'project',
     ];
 
-    public function user(): BelongsTo
+    public function trackings(): HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Booking::class);
     }
 }
