@@ -18,6 +18,6 @@ class Project extends Model
 
     public function trackings(): HasMany
     {
-        return $this->hasMany(Booking::class);
+        return $this->hasMany(Tracking::class);
     }
 }

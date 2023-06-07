@@ -5,15 +5,15 @@
             <input type="text"
              name="person"
               value="{{old('person')}}"
-               placeholder="{{__('Enter Person')}}"
+               placeholder="{{__('Enter Username')}}"
                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             <input type="text"
                 name="project"
                 value="{{old('project')}}"
-                placeholder="{{__('Add persons Full Name')}}"
+                placeholder="{{__('Add Projects Full Name')}}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             <x-input-error :messages="$errors->get('project')" class="mt-2" />
-            <x-primary-button class="mt-4">{{ __('Add Person') }}</x-primary-button>
+            <x-primary-button class="mt-4">{{ __('Add Project') }}</x-primary-button>
         </form>
         <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
             @foreach ($projects as $project)
@@ -47,7 +47,7 @@
                                 </x-dropdown>
                             @endif
                         </div>
-                        <p class="mt-4 text-lg text-gray-900">{{ $project->person }}</p>
+                        <p class="mt-4 text-lg text-gray-900">{{ $project->project }}</p>
                     </div>
                 </div>
             @endforeach

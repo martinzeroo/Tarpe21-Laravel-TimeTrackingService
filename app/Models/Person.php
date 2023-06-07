@@ -13,6 +13,7 @@ class Person extends Model
     protected $fillable=[
         'person',
         'fullname',
+        'identification',
     ];
 
     public function trackings(): HasMany

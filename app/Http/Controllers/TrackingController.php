@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+use App\Models\Person;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
@@ -16,7 +18,9 @@ class TrackingController extends Controller
     {
 
         return view('trackings.index', [
+            'people' => Person::all(),
             'trackings' => Tracking::all(),
+            'projects'=>Project::all(),
         ]);
     }
 
@@ -40,7 +44,10 @@ class TrackingController extends Controller
             'description'=>'string'
         ]);
 
-        $tracking = Tracking::create($validated);
+        $tracking = new Tracking;
+        $tracking->duration_TimeSpent = $validated['duration_TimeSpent'];
+        $tracking->service()->associate(Project::find($validated['project_id']));
+        $tracking->server()->associate($request->people());
         $tracking->save();
 
         return redirect(route('trackings.index'));

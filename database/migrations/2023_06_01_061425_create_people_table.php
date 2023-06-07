@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('person');
             $table->string('fullname');
+            $table->string('identification');
             $table->timestamps();
         });
     }

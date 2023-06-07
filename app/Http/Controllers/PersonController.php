@@ -35,6 +35,7 @@ class PersonController extends Controller
         $validated = $request->validate([
             'person' => 'required|string|max:128',
             'fullname' => 'string',
+            'identification' => 'integer|gte:0',
         ]);
 
         $person = Person::create($validated);
@@ -79,6 +80,7 @@ class PersonController extends Controller
         $validated = $request->validate([
             'person' => 'required|string|max:128',
             'fullname' => 'string',
+            'identification' => 'integer|gte:0',
         ]);
 
 

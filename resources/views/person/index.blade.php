@@ -5,7 +5,7 @@
             <input type="text"
              name="person"
               value="{{old('person')}}"
-               placeholder="{{__('Enter Person')}}"
+               placeholder="{{__('Enter Username')}}"
                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             <input type="text"
                 name="fullname"
@@ -13,6 +13,12 @@
                 placeholder="{{__('Add persons Full Name')}}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             <x-input-error :messages="$errors->get('fullname')" class="mt-2" />
+            <input type="text"
+                name="identification"
+                value="{{old('identification')}}"
+                placeholder="{{__('Identification Code')}}"
+                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+            <x-input-error :messages="$errors->get('identification')" class="mt-2" />
             <x-primary-button class="mt-4">{{ __('Add Person') }}</x-primary-button>
         </form>
 
@@ -49,6 +55,7 @@
                             @endif
                         </div>
                         <p class="mt-4 text-lg text-gray-900 font-bold">{{ $person->fullname }}</p>
+                        <p class="mt-4 text-lg text-gray-900 font-bold">{{ $person->identification }}</p>
                     </div>
                 </div>
             @endforeach
