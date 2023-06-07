@@ -2,21 +2,24 @@
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <form method="POST" action="{{ route('person.store') }}">
             @csrf
+            <label>{{ __('Username')}}
             <input type="text"
              name="person"
               value="{{old('person')}}"
-               placeholder="{{__('Enter Username')}}"
+               placeholder="{{__('Enter username')}}"
                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-            <input type="text"
+            <label>{{ __('Full name')}}
+               <input type="text"
                 name="fullname"
                 value="{{old('fullname')}}"
-                placeholder="{{__('Add persons Full Name')}}"
+                placeholder="{{__('Add full name')}}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             <x-input-error :messages="$errors->get('fullname')" class="mt-2" />
-            <input type="text"
+            <label>{{ __('Identification Code')}}
+                <input type="text"
                 name="identification"
                 value="{{old('identification')}}"
-                placeholder="{{__('Identification Code')}}"
+                placeholder="{{__('Identification code')}}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             <x-input-error :messages="$errors->get('identification')" class="mt-2" />
             <x-primary-button class="mt-4">{{ __('Add Person') }}</x-primary-button>

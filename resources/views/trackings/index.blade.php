@@ -2,14 +2,15 @@
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <form method="POST" action="{{ route('trackings.store') }}">
             @csrf
-
+            <label>{{ __('Time spent in hours')}}
             <input type="number"
                 min="0"
                 name="duration_TimeSpent"
                 value="{{old('duration_TimeSpent')}}"
-                placeholder="{{__('Time Spent')}}"
+                placeholder="{{__('Time spent in hours')}}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-            <textarea
+            <label>{{ __('Description')}}
+                <textarea
                 name="description"
                 placeholder="{{ __('Add a  descsription') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
@@ -20,7 +21,7 @@
                     <select name="project_id" id="">
                         <option value="0" disabled selected>{{ __('Select project') }}</option>
                         @foreach ($projects as $project)
-                        <option value="{{$project->id}}" @selected(old('project_id')==$project->id) >{{ $project->person }}</option>
+                        <option value="{{$project->id}}" @selected(old('project_id')==$project->id) >{{ $project->project }}</option>
                         @endforeach
                     </select>
                 </label>
@@ -48,9 +49,9 @@
                     <div class="flex justify-between items-center">
                     <div class="ml-2 text-sm text-gray-600">
                          Tracking Time:<span class="text-lg text-gray-800"> {{ $tracking->duration_Timespent }}</span><br>
-                        Project :<span class="text-lg text-gray-800"> {{ $tracking->project->person }}</span><br>
+                        Project :<span class="text-lg text-gray-800"> {{ $tracking->project->project }}</span><br>
                         @if (isset($tracking->person))
-                        Person:<span class="text-lg text-gray-800"> {{ $tracking->person->person }}</span>
+                        Person:<span class="text-lg text-gray-800"> {{ $tracking->person->fullname }}</span>
                         @endif
                     </div>
                     @if ($tracking->project->is(auth()->user()))
