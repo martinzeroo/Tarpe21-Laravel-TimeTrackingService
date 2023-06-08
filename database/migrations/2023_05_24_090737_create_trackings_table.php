@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('trackings', function (Blueprint $table) {
             $table->id();
-            $table->string('person',128);
+            $table->unsignedBigInteger('person_id')
+                    ->references('id')
+                    ->on('people');
             $table->integer('duration_TimeSpent');
-            $table->string('project');
-            $table->text('description')->nullable();
+            $table->string('project_id');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

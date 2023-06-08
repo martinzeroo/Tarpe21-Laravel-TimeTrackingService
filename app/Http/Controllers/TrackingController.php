@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use App\Models\Project;
 use App\Models\Person;
 use Illuminate\Http\RedirectResponse;
@@ -16,7 +17,7 @@ class TrackingController extends Controller
      */
     public function index()
     {
-
+        Log::debug("index");
         return view('trackings.index', [
             'people' => Person::all(),
             'trackings' => Tracking::all(),
@@ -37,17 +38,21 @@ class TrackingController extends Controller
      */
     public function store(Request $request):RedirectResponse
     {
+        Log::critical($request);
         $validated = $request->validate([
-            'person' => 'required|string|max:128',
-            'project' => 'string',
+            'person_id' => 'string',
+            'project_id' => 'string',
             'duration_TimeSpent'=> 'integer|gte:0',
-            'description'=>'string'
+            'description'=>'string',
         ]);
-
+        Log::debug("Hello");
         $tracking = new Tracking;
-        $tracking->duration_TimeSpent = $validated['duration_TimeSpent'];
-        $tracking->service()->associate(Project::find($validated['project_id']));
-        $tracking->server()->associate($request->people());
+
+        $tracking->description = $validated['description'];
+        $tracking->duration_Timespent = $validated['duration_TimeSpent'];
+        $tracking->project()->associate(Project::find($validated['project_id']));
+        $tracking->person()->associate(Person::find($validated['person_id']));
+        $tracking->person()->associate($request->User());
         $tracking->save();
 
         return redirect(route('trackings.index'));

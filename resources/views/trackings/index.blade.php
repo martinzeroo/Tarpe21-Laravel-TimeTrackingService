@@ -1,4 +1,7 @@
 <x-app-layout>
+    @foreach ( $errors as $error)
+        <x-input-error :messages="$error"/>
+    @endforeach
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <form method="POST" action="{{ route('trackings.store') }}">
             @csrf
@@ -9,29 +12,31 @@
                 value="{{old('duration_TimeSpent')}}"
                 placeholder="{{__('Time spent in hours')}}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-            <label>{{ __('Description')}}
+            </label>
+            <label>{{ __('description')}}
                 <textarea
                 name="description"
-                placeholder="{{ __('Add a  descsription') }}"
+                placeholder="{{ __('Add a  description') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
             >{{ old('description') }}</textarea>
+            </label>
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
             <x-input-error :messages="$errors->get('duration_Timespent')" class="mt-2" />
                 <label>{{ __('project')}}
-                    <select name="project_id" id="">
+                    <select name="project_id" required>
                         <option value="0" disabled selected>{{ __('Select project') }}</option>
                         @foreach ($projects as $project)
-                        <option value="{{$project->id}}" @selected(old('project_id')==$project->id) >{{ $project->project }}</option>
+                            <option value="{{$project->id}}" @selected(old('project_id')==$project->id) >{{ $project->project }}</option>
                         @endforeach
                     </select>
                 </label>
                 <x-input-error :messages="$errors->get('project_id')" class="mt-2" />
 
                     <label>{{ __('person')}}
-                <select name="person_id" id="">
+                <select name="person_id" required>
                     <option value="0" disabled selected>{{ __('Select person') }}</option>
                     @foreach ($people as $person)
-                    <option value="{{$person->id}}" @selected(old('person_id')==$person->id) >{{ $person->fullname }}</option>
+                        <option value="{{$person->id}}" >{{ $person->fullname }}</option>
                     @endforeach
                 </select>
             </label>
@@ -42,16 +47,17 @@
 
 
         </form>
-        <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
+        <div class="mt-6 shadow-sm rounded-lg divide-y bg-gray-200">
             @foreach ($trackings as $tracking)
-            <div class="flex-1">
+            <div class="flex-1 bg-white mt-2">
                 <div>
                     <div class="flex justify-between items-center">
                     <div class="ml-2 text-sm text-gray-600">
-                         Tracking Time:<span class="text-lg text-gray-800"> {{ $tracking->duration_Timespent }}</span><br>
+                        Username:<span class="text-lg text-gray-800"> {{ $tracking->project->person }}</span><br>
                         Project :<span class="text-lg text-gray-800"> {{ $tracking->project->project }}</span><br>
+                        Identification :<span class="text-lg text-gray-800"> {{ $person->identification }}</span><br>
+                        Description :<span class="text-lg text-gray-800"> {{ $tracking->description }}</span><br>
                         @if (isset($tracking->person))
-                        Person:<span class="text-lg text-gray-800"> {{ $tracking->person->fullname }}</span>
                         @endif
                     </div>
                     @if ($tracking->project->is(auth()->user()))
@@ -73,13 +79,10 @@
                     </div>
                     @if (isset($tracking->project))
                     <div class="ml-2 text-sm text-gray-600">
-                        Service:<span class="text-lg text-gray-800"> {{ $project->person }}</span><br>
-                        <small class="ml-2 text-sm text-gray-600">Duration: {{ $tracking->project->duration_Timespent }}minutes.</small>
+                        Full name:<span class="text-lg text-gray-800"> {{ $person->fullname }}</span><br>
+                        <small class="ml-2 text-sm text-gray-600">Tracking Time: {{ $tracking->duration_TimeSpent }} Hours.</small>
                     </div>
-                    <p class="ml-2 my-4 text-gray-900">{{ $tracking->description }}</p>
-                    <p class="ml-2 my-4 text-gray-900">{{ $tracking->duration_Timespent }}</p>
-                    <p class="ml-2 my-4 text-gray-900">{{ $tracking->project }}</p>
-                    <p class="ml-2 my-4 text-gray-900">{{ $tracking->person }}</p>
+                    {{-- <p class="ml-2 my-4 text-gray-900">{{ $tracking->description }}</p> --}}
                     @endif
                 </div>
             </div>
