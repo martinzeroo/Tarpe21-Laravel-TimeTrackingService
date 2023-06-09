@@ -21,8 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('trackings', TrackingController::class)
-    ->only(['index', 'store', 'edit', 'update', 'destroy'])
-    -> middleware(['auth','verified']);
+    ->only(['index', 'store', 'edit', 'update', 'destroy']);
 
 Route::resource('person', PersonController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])

@@ -55,12 +55,15 @@
                     <div class="ml-2 text-sm text-gray-600">
                         Username:<span class="text-lg text-gray-800"> {{ $tracking->project->person }}</span><br>
                         Project :<span class="text-lg text-gray-800"> {{ $tracking->project->project }}</span><br>
-                        Identification :<span class="text-lg text-gray-800"> {{ $person->identification }}</span><br>
+                        Identification :<span class="text-lg text-gray-800"> {{ $tracking->person->identification }}</span><br>
                         Description :<span class="text-lg text-gray-800"> {{ $tracking->description }}</span><br>
                         @if (isset($tracking->person))
                         @endif
+                        @unless ($tracking->created_at->eq($tracking->updated_at))
+                            <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
+                        @endunless
                     </div>
-                    @if ($tracking->project->is(auth()->user()))
+                    @if ($tracking->person)
                     <x-dropdown>
                         <x-slot name="trigger">
                             <button>
@@ -79,7 +82,7 @@
                     </div>
                     @if (isset($tracking->project))
                     <div class="ml-2 text-sm text-gray-600">
-                        Full name:<span class="text-lg text-gray-800"> {{ $person->fullname }}</span><br>
+                        Full name:<span class="text-lg text-gray-800"> {{ $tracking->person->fullname }}</span><br>
                         <small class="ml-2 text-sm text-gray-600">Tracking Time: {{ $tracking->duration_TimeSpent }} Hours.</small>
                     </div>
                     {{-- <p class="ml-2 my-4 text-gray-900">{{ $tracking->description }}</p> --}}

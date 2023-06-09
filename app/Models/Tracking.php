@@ -18,7 +18,7 @@ class Tracking extends Model
 
     public function person(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Person::class);
     }
 
     public function project(): BelongsTo

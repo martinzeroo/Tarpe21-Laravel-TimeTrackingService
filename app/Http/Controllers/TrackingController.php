@@ -52,7 +52,6 @@ class TrackingController extends Controller
         $tracking->duration_Timespent = $validated['duration_TimeSpent'];
         $tracking->project()->associate(Project::find($validated['project_id']));
         $tracking->person()->associate(Person::find($validated['person_id']));
-        $tracking->person()->associate($request->User());
         $tracking->save();
 
         return redirect(route('trackings.index'));
@@ -71,7 +70,6 @@ class TrackingController extends Controller
      */
     public function edit(Tracking $tracking): View
     {
-        $this->authorize('update', $tracking);
 
 
 
@@ -87,15 +85,14 @@ class TrackingController extends Controller
      */
     public function update(Request $request, Tracking $tracking): RedirectResponse
     {
-        $this->authorize('update', $tracking);
 
 
 
         $validated = $request->validate([
-            'person' => 'required|string|max:128',
-            'project' => 'string',
+            'person_id' => 'string',
+            'project_id' => 'string',
             'duration_TimeSpent'=> 'integer|gte:0',
-            'description'=>'string'
+            'description'=>'string',
         ]);
 
 

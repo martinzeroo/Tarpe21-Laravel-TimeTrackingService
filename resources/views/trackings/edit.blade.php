@@ -3,16 +3,6 @@
         <form method="POST" action="{{ route('trackings.update', $Tracking) }}">
             @csrf
             @method('patch')
-            <input type="text"
-            name="person"
-             value="{{old('person', $Tracking -> person)}}"
-              placeholder="{{__('Name the person')}}"
-              class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-           <input type="text"
-               name="project"
-               value="{{old('project', $Tracking -> project)}}"
-               placeholder="{{__('Name the project')}}"
-               class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
            <input type="number"
                min="0"
                name="duration_TimeSpent"
